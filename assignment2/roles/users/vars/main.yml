@@ -1,0 +1,8 @@
+---
+# vars file for users
+users:
+  - name: user1000
+    groups: ['cloudadmins', 'wheel']
+  - name: user2000
+    groups: ['cloudadmins', 'wheel']
+    ssh_key_file: "{{ ssh_key_file | default('~/.ssh/id_rsa') }}"

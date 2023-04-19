@@ -1,0 +1,39 @@
+---
+  # tasks:
+    - name: Create partitions on the data disk
+      parted:
+        device: "{{ datadisk_device }}"
+        number: "{{ item.number }}"
+        state: present
+        part_end: "{{ item.size }}"
+      with_items: "{{ datadisk_partitions }}"
+      register: parted_result
+
+    - name: Format partitions with the specified filesystem type
+      filesystem:
+        fstype: "{{ item.fstype }}"
+        dev: "{{ datadisk_device }}{{ item.number }}"
+      with_items: "{{ datadisk_partitions }}"
+      when: item.fstype is defined
+
+    - name: Add mount points to fstab
+      lineinfile:
+        path: "{{ datadisk_fstab_path }}"
+        line: "{{ datadisk_device }}{{ item.number }} {{ item.mount_point }} {{ item.fstype }} {{ item.mount_opts }} 0 0"
+        state: present
+      with_items: "{{ datadisk_partitions }}"
+
+    - name: Create mount points
+      file:
+        path: "{{ item.mount_point }}"
+        state: directory
+      with_items: "{{ datadisk_partitions }}"
+
+    - name: Mount partitions
+      mount:
+        path: "{{ item.mount_point }}"
+        src: "{{ datadisk_device }}{{ item.number }}"
+        fstype: "{{ item.fstype }}"
+        opts: "{{ item.mount_opts }}"
+        state: mounted
+      with_items: "{{ datadisk_partitions }}"

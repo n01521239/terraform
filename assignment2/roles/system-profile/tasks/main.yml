@@ -1,0 +1,14 @@
+---
+# tasks file for system-profile
+- name: Add test block to /etc/profile
+  lineinfile:
+    path: /etc/profile
+    line: '#This is a test block added by Ansible......adminuser'
+    insertafter: EOF
+    create: yes
+
+- name: Set TMOUT environment variable in /etc/profile
+  lineinfile:
+    path: /etc/profile
+    line: 'export TMOUT=1800'
+    insertafter: EOF

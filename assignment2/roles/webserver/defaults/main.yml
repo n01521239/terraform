@@ -1,0 +1,9 @@
+---
+# defaults file for webserver
+apache_listen_port: 80
+apache_document_root: /var/www/html
+apache_autostart: true
+apache_autostart_on_boot: true
+apache_files:
+  - vm1.html
+  - vm2.html

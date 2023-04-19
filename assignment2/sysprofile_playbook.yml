@@ -1,0 +1,7 @@
+---
+- name: SYSTEM_PROFILE Playbook
+  hosts: linux
+  become: true
+
+  roles:
+    - system-profile

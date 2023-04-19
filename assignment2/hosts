@@ -1,0 +1,19 @@
+[linux]
+vm-1-dnslabel ansible_host=172.173.241.36 ansible_user=adminuser
+vm-2-dnslabel ansible_host=74.235.35.222 ansible_user=adminuser
+
+[windows]
+win1239publicip.eastus.cloudapp.azure.com
+
+
+[os:children]
+linux
+windows
+
+[windows:vars]
+ansible_user=adminuser
+ansible_password=Vinit123@
+ansible_connection=winrm
+ansible_port=5985
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore

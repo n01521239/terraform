@@ -1,0 +1,6 @@
+# Default values for variables
+datadisk_device: "/dev/sdc"
+datadisk_partitions:
+  - { number: 1, size: "4GiB", fstype: "xfs", mount_point: "/part1", mount_opts: "defaults" }
+  - { number: 2, size: "5GiB", fstype: "ext4", mount_point: "/part2", mount_opts: "defaults" }
+datadisk_fstab_path: "/etc/fstab"

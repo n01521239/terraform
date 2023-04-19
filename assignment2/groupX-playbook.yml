@@ -1,0 +1,15 @@
+---
+- hosts: linux
+  become: yes
+  roles:
+    - users
+    - datadisk
+    - webserver
+    - system-profile
+#  vars:
+ #   users:
+  #    - name: user1000
+   #     groups: ['cloudadmins', 'wheel']
+    #  - name: user2000
+     #   groups: ['cloudadmins', 'wheel']
+
